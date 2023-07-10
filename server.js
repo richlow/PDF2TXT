@@ -1,10 +1,16 @@
 const express = require('express');
+const morgan = require('morgan');
 const multer  = require('multer');
 const convertPdfToText = require('./convert');
+const fs = require('fs');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
 
 const app = express();
+
+// setup the logger
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));

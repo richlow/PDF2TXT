@@ -16,7 +16,7 @@ app.post('/upload', upload.single('file'), (req, res, next) => {
     }).catch(next);
 });
 
-app.get('/download/:filename', (req, res) => {
+app.get('/uploads/:filename', (req, res) => {
     const filename = req.params.filename;
-    res.download(`uploads/${filename}`);
+    res.download(path.join('uploads', filename));
 });
