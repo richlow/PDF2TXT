@@ -3,20 +3,19 @@
 <head>
     <title>PDF to Text Converter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="/js/upload.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-4">PDF to Text Converter</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data" class="mb-4">
-            <div id="drop-zone" class="border p-4 mb-3">
-                <p>Drag and drop a PDF here, or click to select a file to upload.</p>
-                <input type="file" name="file" id="file" class="form-control-file">
-            </div>
-            <input type="submit" value="Upload" class="btn btn-primary">
-        </form>
-        <div id="messages"></div>
-        <div id="results"></div>
+    <h1>PDF to Text Converter</h1>
+    <div id="messages">
+        <% if (message && filename && downloadLink) { %>
+            <%= message %> <a href="<%= downloadLink %>">Download text file</a>
+        <% } %>
     </div>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" accept=".pdf">
+        <button type="submit">Convert</button>
+    </form>
+
+    <script src="/js/upload.js"></script>
 </body>
 </html>
