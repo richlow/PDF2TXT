@@ -1,25 +1,22 @@
-document.getElementById('upload-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+const fs = require('fs');
+const pdfParse = require('pdf-parse');
 
-    var fileInput = document.getElementById('file');
-    var file = fileInput.files[0];
-    var formData = new FormData();
-    formData.append('file', file);
+app.post('/upload', upload.single('file'), (req, res, next) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded');
+    }
 
-    fetch('/upload', {
-        method: 'POST',
-        body: formData
-    })
-    .then(function(response) {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(function(text) {
-        document.getElementById('messages').textContent = text;
-    })
-    .catch(function(error) {
-        document.getElementById('messages').textContent = 'Error: ' + error.message;
-    });
+    const fileBuffer = fs.readFileSync(req.file.path);
+    pdfParse(fileBuffer).then(data => {
+        const text = data.text;
+        const textFilename = `${req.file.filename}.txt`;
+        fs.writeFileSync(`uploads/${textFilename}`, text);
+        const downloadLink = `/download/${textFilename}`;
+        res.status(200).send(`File uploaded and converted successfully. <a href="${downloadLink}">Download text file</a>`);
+    }).catch(next);
+});
+
+app.get('/download/:filename', (req, res) => {
+    const filename = req.params.filename;
+    res.download(`uploads/${filename}`);
 });

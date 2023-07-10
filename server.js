@@ -1,31 +1,29 @@
 const express = require('express');
 const multer  = require('multer');
+const convertPdfToText = require('./convert');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 
-// Set EJS as the view engine
 app.set('view engine', 'ejs');
-
-// Serve static files from the "public" directory
 app.use(express.static('public'));
 
-// Route for the home page
 app.get('/', (req, res) => {
     res.render('home');
 });
 
-// Route for file upload
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/upload', upload.single('file'), (req, res, next) => {
     if (!req.file) {
         return res.status(400).send('No file uploaded');
     }
-    // Process the file here...
-    res.status(200).send('File uploaded successfully');
+
+    convertPdfToText(req.file.path).then(text => {
+        // Save the text to a file, add to a queue, etc.
+        res.status(200).send('File uploaded and converted successfully');
+    }).catch(next);
 });
 
-// Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
