@@ -47,7 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // Clear the file input and disable the submit button
             inputFile.value = '';
             submitButton.disabled = true;
-        }
+        } else if (xhr.status === 429) {
+          const alert = document.createElement('div');
+          alert.className = 'alert alert-warning';
+          alert.role = 'alert';
+          alert.innerText = "You have reached your daily limit of conversions.";
+          messagesDiv.appendChild(alert);
+      }
+      
     };
     
       xhr.send(formData);
