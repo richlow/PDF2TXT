@@ -21,9 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   uploadForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const file = inputFile.files[0];
+    const file = inputFile.files[0];
+    if (file.size > 5 * 1024 * 1024) { // size in bytes
+        alert('File size cannot exceed 5MB.');
+        return;
+    }
       const formData = new FormData();
       formData.append("file", file);
 
@@ -36,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const convertedFilename = response.filename;
     
             const messageHtml = document.createElement('p');
-            messageHtml.innerHTML = convertedMessage + ' <a href="/uploads/' + convertedFilename + '">Download text file</a>';
+            messageHtml.innerHTML = convertedMessage + ' <a href="/uploads/' + convertedFilename + '">download text file</a>';
     
             messagesDiv.appendChild(messageHtml);
     
