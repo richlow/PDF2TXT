@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadForm = document.getElementById("upload-form");
   const inputFile = document.getElementById("file");
   const dropZone = document.getElementById("drop-zone");
+  const submitButton = uploadForm.querySelector('button[type="submit"]');
 
   uploadForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -27,11 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
               const convertedFilename = response.filename;
 
               messagesDiv.innerHTML = convertedMessage + ' <a href="/uploads/' + convertedFilename + '">Download text file</a>';
+
+              // Clear the file input and disable the submit button
+              inputFile.value = '';
+              submitButton.disabled = true;
           }
       };
       xhr.send(formData);
   });
-
+  
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       dropZone.addEventListener(eventName, preventDefaults, false);
   });
