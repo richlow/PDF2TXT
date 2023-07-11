@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropZone = document.getElementById("drop-zone");
   const submitButton = uploadForm.querySelector('button[type="submit"]');
 
+  // Initially disable the convert button
+  submitButton.disabled = true;
+
+  // Enable the convert button once a file has been selected
+  inputFile.addEventListener('change', () => {
+      submitButton.disabled = false;
+  });
+
   uploadForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -22,21 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "/upload");
       xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              const response = JSON.parse(xhr.responseText);
-              const convertedMessage = response.message;
-              const convertedFilename = response.filename;
-
-              messagesDiv.innerHTML = convertedMessage + ' <a href="/uploads/' + convertedFilename + '">Download text file</a>';
-
-              // Clear the file input and disable the submit button
-              inputFile.value = '';
-              submitButton.disabled = true;
-          }
-      };
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            const convertedMessage = response.message;
+            const convertedFilename = response.filename;
+    
+            const messageHtml = document.createElement('p');
+            messageHtml.innerHTML = convertedMessage + ' <a href="/uploads/' + convertedFilename + '">Download text file</a>';
+    
+            messagesDiv.appendChild(messageHtml);
+    
+            // Clear the file input and disable the submit button
+            inputFile.value = '';
+            submitButton.disabled = true;
+        }
+    };
+    
       xhr.send(formData);
   });
-  
+
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       dropZone.addEventListener(eventName, preventDefaults, false);
   });

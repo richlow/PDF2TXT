@@ -7,11 +7,6 @@
 <body>
     <div class="container">
         <h1>PDF to Text Converter</h1>
-        <div id="messages">
-            <% if (message && filename && downloadLink) { %>
-                <%= message %> <a href="<%= downloadLink %>">Download text file</a>
-            <% } %>
-        </div>
         <form id="upload-form" enctype="multipart/form-data">
             <div id="drop-zone" class="border p-4 mb-3">
                 <p>Drag and drop a PDF here, or click to select a file to upload.</p>
@@ -19,6 +14,11 @@
             </div>
             <button type="submit">Convert</button>
         </form>
+        <div id="messages">
+            <% if (message && filename && downloadLink) { %>
+                <%= message %> <a href="<%= downloadLink %>">download text file</a>
+            <% } %>
+        </div>
     </div>
 
     <script src="/js/upload.js"></script>
