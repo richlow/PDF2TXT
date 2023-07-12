@@ -52,7 +52,8 @@ app.post('/contact-me', (req, res) => {
 
   // Code to send the email using your preferred method or library
 
-  res.render('contact-me', { message: 'Message sent successfully!' });
+  // Redirect to the main page after sending the email
+  res.redirect('/');
 });
 
 // File Upload and Conversion
