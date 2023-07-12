@@ -17,6 +17,10 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+// Body parsing middleware
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
 app.get('/', (req, res) => {
   res.render('home', { message: null, filename: null });
 });
@@ -29,6 +33,29 @@ app.get('/privacy-policy', (req, res) => {
   res.sendFile(path.join(__dirname, 'privacy-policy.html'));
 });
 
+// Contact Me Form
+app.get('/contact-me', (req, res) => {
+  res.render('contact-me', { message: null });
+});
+
+app.post('/contact-me', (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.message;
+
+  // Customize the email subject and recipient
+  const to = 'richlow+PDF2TXT@gmail.com';
+  const subject = 'New Contact Form Submission';
+  const body = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+
+  console.log(`New email. Name: ${name}, Email: ${email}, Message: ${message}`);
+
+  // Code to send the email using your preferred method or library
+
+  res.render('contact-me', { message: 'Message sent successfully!' });
+});
+
+// File Upload and Conversion
 let conversionCounts = {};
 const CONVERSION_LIMIT = 5; // Set your limit here
 
@@ -56,7 +83,6 @@ app.post('/upload', upload.single('file'), (req, res, next) => {
       fs.writeFileSync(path.join('uploads', textFilename), text);
       const downloadLink = `/uploads/${textFilename}`;
 
-      // Change the response to JSON
       res.json({
         message: 'File uploaded and converted successfully',
         filename: textFilename,
