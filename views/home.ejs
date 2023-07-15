@@ -5,35 +5,174 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Add the CSS styles here */
+        .testimonial-section {
+            background-color: #FFFFE0; /* Light yellow */
+            padding: 20px 0; /* Adjust padding as needed */
+            overflow: hidden; /* Hide overflow to prevent horizontal scroll */
+        }
+        .wave-top {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-image: linear-gradient(to right, #FFFFE0 0%, #FFFFFF 50%, #FFFFE0 100%);
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📄 PDF to TXT Converter</h1>
-        <form id="upload-form" enctype="multipart/form-data">
-            <div id="drop-zone" class="border p-4 mb-3">
-                <p>Drag and drop a PDF here, or click to select a file to upload.</p>
-                <input type="file" name="file" id="file" class="form-control-file" accept=".pdf" required>
+    <div>
+        <div class="container">
+            <div class="flex items-center justify-center overflow-x-clip">
+                <div class="py-4 md:py-8">
+                    <div class="mx-auto w-full px-8 max-w-5xl relative">
+                        <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center md:gap-4">
+                    <h1>📄 PDF to TXT Converter</h1>
+
+                    <!-- Main Section -->
+                    <form id="upload-form" enctype="multipart/form-data">
+                        <div id="drop-zone" class="border p-4 mb-3">
+                            <p>Drag and drop a PDF here, or click to select a file to upload.</p>
+                            <input type="file" name="file" id="file" class="form-control-file" accept=".pdf" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Convert</button>
+                    </form>
+                    <div id="messages">
+                        <% if (message && filename && downloadLink) { %>
+                            <%= message %> <a href="<%= downloadLink %>">download text file</a>
+                        <% } %>
+                    </div>
+                    </div>
+                </div>
             </div>
-            <button type="submit">Convert</button>
-        </form>
-        <div id="messages">
-            <% if (message && filename && downloadLink) { %>
-                <%= message %> <a href="<%= downloadLink %>">download text file</a>
-            <% } %>
+        </div>
+
+        <div>
+            <!-- How It Works Section -->
+            <section id="how-it-works" style="padding: 0 40px;">
+                <h2 class="section-title">How It Works</h2>
+                <div class="row">
+                    <div class="col-md-4 d-flex">
+                        <div class="step w-100 mb-4">
+                            <h3>Step 1: Upload Your PDF</h3>
+                            <p>Drag and drop your PDF into the upload box, or click the box to select a PDF from your device.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex">
+                        <div class="step w-100 mb-4">
+                            <h3>Step 2: Convert to TXT</h3>
+                            <p>Once your PDF is uploaded, click the "Convert" button. Our app will then start converting your PDF to a TXT file.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex">
+                        <div class="step w-100 mb-4">
+                            <h3>Step 3: Download Your TXT</h3>
+                            <p>After the conversion is complete, you'll be able to download your TXT file. Just click on the "Download" link that appears.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <div class="container">
+            <!-- Examples Section -->
+            <section id="examples">
+                <h2 class="section-title"></h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="text-center">Convert PDF to TXT automatically in seconds with one click</h3>
+                        <img src="/img/free.png" alt="Convert" class="img-fluid">
+                        <p class="example-content"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/img/easy.png" alt="Easy" class="img-fluid">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <!-- Use Cases Section -->
+            <section id="use-cases" style="padding: 0 40px;">
+                <h2 class="section-title">Unleash the Potential</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Research Paper Analysis</h3>
+                        <p>Researchers often analyze large volumes of academic papers for various purposes. Converting PDF research papers to TXT format allows for text mining techniques like sentiment analysis, citation analysis, or topic modeling.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Content Extraction from Legal Documents</h3>
+                        <p>Law firms may need to extract specific clauses or information from legal contracts or agreements stored in PDF format. Converting these PDF files to plain text makes it easier to extract and analyze the relevant content.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Data Extraction from Financial Statements</h3>
+                        <p>Companies or individuals may receive financial statements in PDF format, such as bank statements or invoices. Converting them to TXT format allows for automated extraction of key data points like transaction details, amounts, or dates for accounting or analysis purposes.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Accessibility for Visually Impaired Users</h3>
+                        <p>Educational institutions or organizations that share documents with visually impaired individuals can convert PDF files to plain text for compatibility with screen readers and assistive technologies.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Web Scraping</h3>
+                        <p>Some websites may offer content in PDF format, such as whitepapers or product documentation. Converting these PDF files to TXT format enables web scraping tools to extract the text and analyze it for various purposes like market research or content aggregation.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Document Archival and Preservation</h3>
+                        <p>Libraries or archives often need to store and preserve historical documents, manuscripts, or newspapers. Converting PDF files to plain text ensures that the content remains accessible even if the original PDF format becomes obsolete in the future.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Content Editing</h3>
+                        <p>Writers or editors who receive PDF files for review or editing purposes can convert them to plain text to make necessary changes using standard text editors before converting them back to PDF format.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div>
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="testimonial-section">
+                <div class="wave-top"></div> <!-- Wave effect div -->
+                <h2 class="section-title">Testimonials</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <blockquote>
+                            <p>"This app is a game changer. It has significantly improved my workflow and saved me countless hours."</p>
+                            <footer>- Jane Doe, Researcher</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote>
+                            <p>"I love how easy it is to convert PDFs to text. I use it daily for my work."</p>
+                            <footer>- John Smith, Journalist</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote>
+                            <p>"A must-have tool for anyone who works with PDFs regularly. Highly recommended!"</p>
+                            <footer>- Charlie Brown, Student</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-            <p class="text-muted">
-                Made with ❤️ in Noosa (Australia) |
-                <a href="/terms-of-service">Terms of Service</a> | 
-                <a href="/privacy-policy">Privacy Policy</a> |
-                <a href="/contact-me">Contact Me</a>
-            </p>
-        </div>
-    </footer>
+
+   
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container text-center">
+                    <p class="text-muted">
+                        Made with ❤️ in Noosa (Australia) |
+                        <a href="/terms-of-service">Terms of Service</a> | 
+                        <a href="/privacy-policy">Privacy Policy</a> |
+                        <a href="/contact-me">Contact Me</a>
+                    </p>
+                </div>
+            </footer>
 
     <script src="/js/upload.js"></script>
 </body>

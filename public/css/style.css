@@ -11,3 +11,40 @@ body {
     background: #f8f9fa;
     padding: 10px 0;
 }
+
+.step {
+    background-color: #FFD700; /* Golden yellow */
+    padding: 20px;
+    border-radius: 5px; /* Optional: to give the boxes rounded corners */
+    color: black; /* Optional: to ensure text is readable against the yellow background */
+}
+
+.section-title {
+    text-align: center;
+    font-weight: bold;
+    color: #3E2723; /* Darker brown */
+}
+
+section {
+    padding: 250px 0; /* Adjust this value as needed */
+}
+
+.example-content {
+    font-family: 'Courier New', monospace;
+}
+
+.testimonial-section {
+    background-color: #FFFFE0; /* Light yellow */
+    padding: 20px 0; /* Adjust padding as needed */
+    overflow: hidden; /* Hide overflow to prevent horizontal scroll */
+}
+
+/* Wave effect styles */
+.wave-top {
+    position: absolute;
+    top: -10px; /* Adjust this value to control the height of the wave effect */
+    left: 0;
+    width: 100%;
+    height: 250px; /* Adjust this value to control the height of the wave effect */
+    background-image: linear-gradient(to right, #FFFFE0 0%, #FFFFFF 50%, #FFFFE0 100%); /* Light yellow to white to light yellow gradient */
+}
