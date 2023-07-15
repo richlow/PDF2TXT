@@ -41,9 +41,15 @@
                     </form>
                     <div id="messages">
                         <% if (message && filename && downloadLink) { %>
-                            <%= message %> <a href="<%= downloadLink %>">download text file</a>
+                            <h3>Conversion Status</h3>
+                            <p><%= message %></p>
+                            <p>Download the converted file: <a href="<%= downloadLink %>"><%= filename %></a></p>
+                        <% } else if (message) { %>
+                            <h3 style="display: none;">Conversion Status</h3>
+                            <p><%= message %></p>
                         <% } %>
                     </div>
+                                  
                     </div>
                 </div>
             </div>
