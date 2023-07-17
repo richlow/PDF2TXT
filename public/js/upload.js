@@ -29,15 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("File size cannot exceed 5MB.");
         return;
       }
-      
-      // Fetch the user's IP address
+  
+      const formData = new FormData();
+      formData.append("file", file);
+  
       fetch("https://api.ipify.org?format=json")
         .then((response) => response.json())
         .then((data) => {
           const userIP = data.ip;
-  
-          const formData = new FormData();
-          formData.append("file", file);
           formData.append("ip", userIP);
   
           const xhr = new XMLHttpRequest();
@@ -106,4 +105,4 @@ document.addEventListener("DOMContentLoaded", () => {
       inputFile.files = files;
     }
   });
-   
+  
