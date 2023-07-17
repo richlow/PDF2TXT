@@ -48,3 +48,7 @@ section {
     height: 250px; /* Adjust this value to control the height of the wave effect */
     background-image: linear-gradient(to right, #FFFFE0 0%, #FFFFFF 50%, #FFFFE0 100%); /* Light yellow to white to light yellow gradient */
 }
+
+.hidden {
+    display: none;
+  }

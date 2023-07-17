@@ -20,6 +20,12 @@ app.use(express.static('public'));
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
 
+// CSP header
+//app.use((req, res, next) => {
+//  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'");
+//  next();
+//});
+
 // Routes
 app.get('/', (req, res) => {
   res.render('home', { message: null, filename: null });
