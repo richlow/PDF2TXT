@@ -28,8 +28,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-  const ipAddress = req.ip;
-  console.log('User IP:', ipAddress);
+  // Get the forwarded IP address from the 'X-Forwarded-For' header
+  const userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  console.log('User IP:', userIP);
+
   res.render('home', { message: null, filename: null });
 });
 
