@@ -28,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
+  const ipAddress = req.ip;
+  console.log('User IP:', ipAddress);
   res.render('home', { message: null, filename: null });
 });
 

@@ -40,17 +40,15 @@
                         <button type="submit" class="btn btn-primary">Convert</button>
                     </form>
                     <div id="messages">
-                        <% if (message && filename && downloadLink) { %>
+                        <% if (message) { %>
                           <h3 class="conversion-status">Conversion Status</h3>
                           <p><%= message %></p>
-                          <p>Download the converted file: <a href="<%= downloadLink %>"><%= filename %></a></p>
-                        <% } else if (message) { %>
-                          <h3 class="conversion-status hidden">Conversion Status</h3>
-                          <p><%= message %></p>
+                          <% if (filename && downloadLink) { %>
+                            <p>Download the converted file: <a href="<%= downloadLink %>"><%= filename %></a></p>
+                            <canvas id="confetti-canvas"></canvas>
+                          <% } %>
                         <% } %>
-                      </div>
-                      
-                                  
+                      </div>             
                     </div>
                 </div>
             </div>
