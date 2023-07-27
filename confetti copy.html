@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confetti Button</title>
+  <style>
+    body {
+      text-align: center;
+    }
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Confetti Button</h1>
+  <button id="confettiButton">Show Confetti</button>
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
+
+  <script>
+    // Function to show confetti
+    function showConfetti() {
+      var confettiCanvas = document.getElementById("confettiCanvas");
+
+      // Configure and trigger confetti effect
+      var confettiSettings = {"target":"confettiCanvas","max":"100","size":"4","animate":true,"props":["circle","square","triangle","line"],"colors":[[165,104,246],[230,61,135],[0,199,228],[253,214,126]],"clock":"40","rotate":true,"width":"1773","height":"1238","start_from_edge":false,"respawn":false}
+      var confetti = new ConfettiGenerator(confettiSettings);
+      confetti.render();
+    }
+
+    // Add event listener to the button
+    var confettiButton = document.getElementById("confettiButton");
+    confettiButton.addEventListener("click", showConfetti);
+  </script>
+</body>
+</html>
