@@ -17,6 +17,13 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+//grab the URL (for the terms and conditions)
+app.get('/terms-of-service', (req, res) => {
+  const currentUrl = req.url;
+  // Pass the currentUrl as a variable to the "terms" view
+  res.render('terms-of-service', { currentUrl });
+});
+
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,8 +42,13 @@ app.get('/', (req, res) => {
   res.render('home', { message: null, filename: null });
 });
 
-app.get('/terms-of-service', (req, res) => {
-  res.sendFile(path.join(__dirname, 'terms-of-service.html'));
+//app.get('/terms-of-service', (req, res) => {
+  //res.sendFile(path.join(__dirname, 'terms-of-service.ejs'));
+//  res.render('terms-of-service', { message: null, filename: null });
+//});
+
+app.get('/confetti', (req, res) => {
+  res.sendFile(path.join(__dirname, 'confetti.html'));
 });
 
 app.get('/privacy-policy', (req, res) => {
