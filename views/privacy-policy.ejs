@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Privacy Policy</h1>
 
-        <p>[Your business name] is committed to providing quality services to you and this policy outlines our ongoing obligations to you in respect of how we manage your Personal Information.
+        <p><%= currentUrl %> is committed to providing quality services to you and this policy outlines our ongoing obligations to you in respect of how we manage your Personal Information.
             We have adopted the Australian Privacy Principles (APPs) contained in the Privacy Act 1988 (Cth) (the Privacy Act). The NPPs govern the way in which we collect, use, disclose, store, secure and dispose of your Personal Information.
             A copy of the Australian Privacy Principles may be obtained from the website of The Office of the Australian Information Commissioner at https://www.oaic.gov.au/.</p>
 
@@ -48,24 +48,13 @@
         <h2>Policy Updates</h2>
         <p>This Policy may change from time to time and is available on our website.</p>
         <h2>Privacy Policy Complaints and Enquiries</h2>
-        <p>If you have any queries or complaints about our Privacy Policy please contact us at:</p>
-        <p>[Your business name]</p>
-        <p>[Address]</p>
-        <p>[Phone]</p>
-        <p>Last updated: Month Day, Year</p>
+        <p>If you have any queries or complaints about our Privacy Policy please <a href="/contact-me">contact us</a></p>
+        <p>Last updated: July 27, 2023</p>
         <a href="/">Back to Main Page</a>
     </div>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container text-center">
-        <p class="text-muted">
-            Made with ❤️ in Noosa (Australia) |
-            <a href="/terms-of-service">Terms of Service</a> |
-            <a href="/privacy-policy">Privacy Policy</a> |
-            <a href="/contact-me">Contact Me</a>
-        </p>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+  
 </body>
 </html>

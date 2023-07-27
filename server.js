@@ -19,7 +19,9 @@ app.use(express.static('public'));
 
 //grab the URL (for the terms and conditions)
 app.get('/terms-of-service', (req, res) => {
-  const currentUrl = req.url;
+  //const currentUrl = req.url;
+  const currentUrl = `${req.hostname}`;
+
   // Pass the currentUrl as a variable to the "terms" view
   res.render('terms-of-service', { currentUrl });
 });
@@ -52,7 +54,10 @@ app.get('/confetti', (req, res) => {
 });
 
 app.get('/privacy-policy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'privacy-policy.html'));
+  //res.sendFile(path.join(__dirname, 'privacy-policy.html'));
+  const currentUrl = `${req.hostname}`;
+  //res.render('privacy-policy', { message: null, filename: null });
+  res.render('privacy-policy', { currentUrl });
 });
 
 // Contact Me Form
