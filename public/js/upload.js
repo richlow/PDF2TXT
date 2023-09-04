@@ -20,13 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
       submitButton.disabled = false;
     });
   
-    uploadForm.addEventListener("submit", (event) => {
+    uploadForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      console.log("Form submitted"); // Debugging line
+
+      // Show the loading indicator
+      const loadingIndicator = document.getElementById("loading-indicator");
+      loadingIndicator.style.display = "block";
+      console.log("Loading Indicator"); // Debugging line
   
       const file = inputFile.files[0];
       if (file.size > 5 * 1024 * 1024) {
         // size in bytes
         alert("File size cannot exceed 5MB.");
+        // Hide the loading indicator when there's an error
+    loadingIndicator.style.display = "none";
         return;
       }
   
@@ -61,6 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
               alert.role = "alert";
               alert.innerText = "You have reached your daily limit of conversions.";
               messagesDiv.appendChild(alert);
+              // Hide the loading indicator when there's an error
+              loadingIndicator.style.display = "none";
             }
           };
   
@@ -68,6 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch((error) => {
           console.error("Error fetching user IP:", error);
+          // Hide the loading indicator when there's an error
+          loadingIndicator.style.display = "none";
         });
     });
   
